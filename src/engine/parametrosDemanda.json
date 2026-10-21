@@ -1,0 +1,15 @@
+{
+  "_comentario": "Parámetros del modelo de demanda. Explicación y cómo recalibrar: docs/modelo-demanda.md",
+  "ordenesBasePorEmpresa": 1346,
+  "precioReferencia": 90,
+  "marketingReferencia": 8500,
+  "elasticidadPrecioMercado": 1.0,
+  "elasticidadMarketingMercado": 0.1,
+  "sensibilidadPrecio": 0.0725,
+  "sensibilidadPrecioCuadratica": 0.0075,
+  "exponenteMarketing": 0.875,
+  "colchonMarketing": 500,
+  "pesoID": 0.3,
+  "suavizadoID": 5000,
+  "ruido": 0.02
+}

@@ -1,0 +1,174 @@
+{
+  "id": "calidad",
+  "nombre": "SONAR: el público exige calidad",
+  "descripcion": "Auriculares inteligentes. Los clientes pagan más por el mejor producto: la Investigación y Desarrollo pesa mucho. A mitad de año llegan auriculares importados.",
+  "estadoInicial": {
+    "efectivo": 120000,
+    "planta": 80000,
+    "capacitacionAcumulada": 0,
+    "idAcumulado": 0,
+    "empleados": 0,
+    "prestamosTomados": [55000, 65000]
+  },
+  "economiaInicial": {
+    "bancos": [
+      { "maximoCredito": 90000, "tasaAnual": 27 },
+      { "maximoCredito": 75000, "tasaAnual": 36 }
+    ],
+    "tasaImpuesto": 35,
+    "tasaMantenimiento": 10,
+    "costoStockUnidad": 10,
+    "limiteGiro": 10000
+  },
+  "periodo0": {
+    "nombreEnReporte": "IGUALES",
+    "decisiones": {
+      "precio": 90,
+      "marketing": 8500,
+      "investigacion": 1000,
+      "capacitacion": 4000,
+      "ampliacion": 10000,
+      "pedidos": [0, 0],
+      "devoluciones": [0, 0],
+      "nivel": 75
+    },
+    "decisionesMostradas": { "pedidos": [55000, 65000] }
+  },
+  "periodos": [
+    {
+      "numero": 1,
+      "ronda": "FINAL",
+      "volanta": "SONIDO DE OTRO NIVEL",
+      "titulo": "LOS AURICULARES SONAR LLEGAN AL MERCADO",
+      "copete": "Un nuevo tipo de auricular inteligente promete un sonido nunca antes escuchado.",
+      "noticia": [
+        "Los auriculares SONAR combinan cancelación de ruido, traducción simultánea y un sonido de altísima fidelidad. Desde su presentación se convirtieron en el objeto de deseo de los amantes de la música y de la tecnología.",
+        "A diferencia de otros productos tecnológicos, los compradores de SONAR son muy exigentes: leen reseñas, comparan modelos y están dispuestos a pagar más por el auricular que mejor suena. Las empresas que inviertan en Investigación y Desarrollo para mejorar su producto tendrán una clara ventaja en los próximos períodos.",
+        "Se recuerda a los gerentes que las mejoras que se logren con la investigación recién llegan a los consumidores en el período siguiente al que se hizo la inversión."
+      ],
+      "limites": {
+        "precioMin": 86,
+        "precioMax": 98,
+        "marketingMin": 0,
+        "marketingMax": 10000,
+        "investigacionMax": 15000,
+        "ampliacionMax": 15000
+      },
+      "tags": ["calidad", "crecimiento"],
+      "demanda": { "crecimiento": 1.04, "pesoID": 0.9 }
+    },
+    {
+      "numero": 2,
+      "ronda": "FINAL",
+      "volanta": "LA CRÍTICA ESPECIALIZADA ELIGE",
+      "titulo": "LAS RESEÑAS DEFINEN LAS VENTAS",
+      "copete": "Las revistas de tecnología publicaron sus primeras comparaciones entre marcas de SONAR.",
+      "noticia": [
+        "Las principales revistas y canales de tecnología probaron los auriculares de todas las marcas. Las diferencias de calidad entre fabricantes ya se notan y los consumidores les prestan mucha atención: la marca mejor puntuada se lleva gran parte de las ventas, aun siendo más cara.",
+        "El mercado sigue creciendo a buen ritmo. Los fabricantes que todavía no invirtieron en mejorar su producto corren el riesgo de quedar relegados y tener que competir solamente con el precio.",
+        "Los bancos mantienen sus condiciones sin cambios."
+      ],
+      "limites": {
+        "precioMin": 88,
+        "precioMax": 100,
+        "marketingMin": 0,
+        "marketingMax": 10000,
+        "investigacionMax": 20000,
+        "ampliacionMax": 15000
+      },
+      "tags": ["calidad", "crecimiento"],
+      "demanda": { "crecimiento": 1.1, "pesoID": 1.0 }
+    },
+    {
+      "numero": 3,
+      "ronda": "FINAL",
+      "volanta": "COMPETENCIA DEL EXTERIOR",
+      "titulo": "LLEGAN LOS AURICULARES IMPORTADOS",
+      "copete": "Una reconocida marca extranjera desembarca en el país con su propia línea de auriculares inteligentes.",
+      "noticia": [
+        "Una marca internacional comenzó a vender en el país auriculares similares a los SONAR. Por ahora llegan en pocas cantidades y a un precio alto, pero se estima que se quedarán con alrededor del 8% de las ventas totales.",
+        "Para no perder clientes frente a los importados, los especialistas recomiendan a los fabricantes locales seguir mejorando la calidad de sus productos y no descuidar la publicidad.",
+        "El aumento en el costo de los componentes electrónicos hizo que la tasa de mantenimiento de las plantas pase del 10% al 12%."
+      ],
+      "limites": {
+        "precioMin": 88,
+        "precioMax": 102,
+        "marketingMin": 0,
+        "marketingMax": 12000,
+        "investigacionMax": 20000,
+        "ampliacionMax": 15000
+      },
+      "cambiosEconomia": { "tasaMantenimiento": 12 },
+      "tags": ["calidad", "competencia_externa", "crecimiento"],
+      "demanda": { "crecimiento": 1.2, "pesoID": 1.0, "competidoresExternos": 0.08 }
+    },
+    {
+      "numero": 4,
+      "ronda": "FINAL",
+      "volanta": "MÁS CRÉDITO PARA LA INDUSTRIA",
+      "titulo": "LOS BANCOS APUESTAN A LA TECNOLOGÍA",
+      "copete": "Los bancos amplían sus líneas de crédito para las empresas del sector.",
+      "noticia": [
+        "Con el objetivo de que la industria local pueda competir con los productos importados, el Banco {banco1} amplió su máximo de crédito a U$S 110.000 y el Banco {banco2} a U$S 90.000. Las tasas de interés se mantienen sin cambios.",
+        "Los importados siguen presentes en el mercado, aunque su participación no creció. Los consumidores continúan eligiendo los auriculares de mejor calidad.",
+        "Se aconseja a los gerentes no tomar más créditos de los que necesitan: un préstamo que no se usa solamente genera intereses."
+      ],
+      "limites": {
+        "precioMin": 90,
+        "precioMax": 104,
+        "marketingMin": 0,
+        "marketingMax": 12000,
+        "investigacionMax": 20000,
+        "ampliacionMax": 15000
+      },
+      "cambiosEconomia": {
+        "bancos": [{ "maximoCredito": 110000 }, { "maximoCredito": 90000 }]
+      },
+      "tags": ["calidad", "competencia_externa", "crecimiento"],
+      "demanda": { "crecimiento": 1.28, "pesoID": 1.0, "competidoresExternos": 0.08 }
+    },
+    {
+      "numero": 5,
+      "ronda": "FINAL",
+      "volanta": "TEMPORADA ALTA",
+      "titulo": "LOS SONAR, EL REGALO DEL AÑO",
+      "copete": "Las fiestas impulsan la venta de auriculares y los consumidores siguen buscando lo mejor.",
+      "noticia": [
+        "La temporada de fiestas trajo un fuerte aumento en las ventas. Los SONAR de las marcas mejor valoradas se agotan en los comercios, mientras que los de menor calidad cuestan más de vender.",
+        "Los importados perdieron terreno frente a las marcas locales que más invirtieron en su producto y su participación baja al 5% del mercado.",
+        "Los gerentes deben recordar que la investigación y la capacitación que se hagan ahora recién se notan en el período siguiente."
+      ],
+      "limites": {
+        "precioMin": 90,
+        "precioMax": 104,
+        "marketingMin": 0,
+        "marketingMax": 12000,
+        "investigacionMax": 20000,
+        "ampliacionMax": 10000
+      },
+      "tags": ["calidad", "crecimiento"],
+      "demanda": { "crecimiento": 1.34, "pesoID": 1.0, "competidoresExternos": 0.05 }
+    },
+    {
+      "numero": 6,
+      "ronda": "FINAL",
+      "volanta": "PERÍODO EXTRA",
+      "titulo": "UN MERCADO MADURO",
+      "copete": "Después de la temporada alta, las ventas se estabilizan.",
+      "noticia": [
+        "El mercado de los auriculares inteligentes se estabilizó. La calidad sigue siendo lo que más valoran los compradores.",
+        "Este período existe solo en la versión de 6 períodos."
+      ],
+      "limites": {
+        "precioMin": 90,
+        "precioMax": 104,
+        "marketingMin": 0,
+        "marketingMax": 12000,
+        "investigacionMax": 20000,
+        "ampliacionMax": 10000
+      },
+      "tags": ["calidad"],
+      "demanda": { "crecimiento": 1.34, "pesoID": 1.0, "competidoresExternos": 0.05 }
+    }
+  ]
+}

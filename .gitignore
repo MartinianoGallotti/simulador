@@ -1,0 +1,12 @@
+node_modules
+dist
+coverage
+*.log
+.claude/
+
+# Material del certamen que no hace falta para la web y no conviene publicar
+# (imágenes de informes, captura de la planilla y transcripción del video).
+# La planilla de costos (planilla_costos.json/.csv) sí se sube porque la usa el simulador.
+referencia/*.jpg
+referencia/*.png
+referencia/transcripcion_video_capacitacion.txt

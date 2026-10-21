@@ -1,0 +1,177 @@
+{
+  "id": "recesion",
+  "nombre": "URBAN: tiempos difíciles",
+  "descripcion": "Monopatines eléctricos. Arranca bien, pero la economía entra en recesión y los bancos suben las tasas. Gana el que no se endeuda de más ni fabrica para el depósito.",
+  "estadoInicial": {
+    "efectivo": 120000,
+    "planta": 80000,
+    "capacitacionAcumulada": 0,
+    "idAcumulado": 0,
+    "empleados": 0,
+    "prestamosTomados": [55000, 65000]
+  },
+  "economiaInicial": {
+    "bancos": [
+      { "maximoCredito": 90000, "tasaAnual": 27 },
+      { "maximoCredito": 75000, "tasaAnual": 36 }
+    ],
+    "tasaImpuesto": 35,
+    "tasaMantenimiento": 10,
+    "costoStockUnidad": 10,
+    "limiteGiro": 10000
+  },
+  "periodo0": {
+    "nombreEnReporte": "IGUALES",
+    "decisiones": {
+      "precio": 90,
+      "marketing": 8500,
+      "investigacion": 1000,
+      "capacitacion": 4000,
+      "ampliacion": 10000,
+      "pedidos": [0, 0],
+      "devoluciones": [0, 0],
+      "nivel": 75
+    },
+    "decisionesMostradas": { "pedidos": [55000, 65000] }
+  },
+  "periodos": [
+    {
+      "numero": 1,
+      "ronda": "FINAL",
+      "volanta": "LA MOVILIDAD URBANA SE RENUEVA",
+      "titulo": "LLEGAN LOS MONOPATINES URBAN",
+      "copete": "Un nuevo monopatín eléctrico, liviano y plegable, promete cambiar la forma de moverse en la ciudad.",
+      "noticia": [
+        "El tránsito en las grandes ciudades es cada vez más complicado y muchas personas buscan nuevas formas de trasladarse. En este contexto aparece el URBAN, un monopatín eléctrico liviano, plegable y con una batería que permite recorrer hasta 30 kilómetros con una sola carga.",
+        "El producto tuvo una muy buena recepción entre estudiantes y trabajadores que viajan distancias cortas, y los comercios ya reciben consultas. Se espera un buen comienzo de ventas.",
+        "Sin embargo, algunos economistas advierten que la economía muestra señales de cansancio y que no sería raro que el consumo se enfríe en los próximos meses. Recomiendan a los gerentes crecer con prudencia y no endeudarse más de lo necesario."
+      ],
+      "limites": {
+        "precioMin": 86,
+        "precioMax": 94,
+        "marketingMin": 0,
+        "marketingMax": 10000,
+        "investigacionMax": 10000,
+        "ampliacionMax": 15000
+      },
+      "tags": ["crecimiento"],
+      "demanda": { "crecimiento": 1.04, "pesoID": 0.2 }
+    },
+    {
+      "numero": 2,
+      "ronda": "FINAL",
+      "volanta": "SE ENFRÍA LA ECONOMÍA",
+      "titulo": "CAE EL CONSUMO",
+      "copete": "Los últimos datos confirman lo que muchos temían: la economía entró en recesión.",
+      "noticia": [
+        "Las ventas en los comercios bajaron en casi todos los rubros. Las familias cuidan más su dinero y postergan las compras que no son imprescindibles. Los monopatines URBAN no escapan a esta situación y se espera que la demanda sea menor que la del período anterior.",
+        "En momentos así, fabricar de más es un error costoso: la mercadería que no se vende queda en el depósito y genera gastos de mantenimiento de stock. Los especialistas aconsejan ajustar la producción a lo que realmente se puede vender.",
+        "Los compradores que todavía se acercan a los comercios comparan mucho los precios antes de decidirse."
+      ],
+      "limites": {
+        "precioMin": 84,
+        "precioMax": 92,
+        "marketingMin": 0,
+        "marketingMax": 10000,
+        "investigacionMax": 8000,
+        "ampliacionMax": 10000
+      },
+      "tags": ["recesion"],
+      "demanda": { "crecimiento": 0.94, "precioReferencia": 88, "pesoID": 0.1 }
+    },
+    {
+      "numero": 3,
+      "ronda": "FINAL",
+      "volanta": "LA CRISIS SE PROFUNDIZA",
+      "titulo": "LOS BANCOS SUBEN LAS TASAS",
+      "copete": "Ante la falta de dinero en la economía, los bancos encarecen y recortan el crédito.",
+      "noticia": [
+        "La recesión se profundizó y el consumo volvió a caer. Los bancos, preocupados por el riesgo de que las empresas no puedan pagar, decidieron endurecer sus condiciones.",
+        "El Banco {banco1} subió su tasa de interés anual del 27% al 33%. El Banco {banco2} la llevó del 36% al 44% y además redujo su máximo de crédito a U$S 70.000. Las empresas que tengan préstamos tomados por encima de ese máximo no podrán pedirle más dinero a ese banco.",
+        "Se recomienda a los gerentes revisar muy bien su hoja de trabajo: con las tasas más altas, cada peso que se pida prestado sale más caro, y devolver los préstamos más caros puede ser una buena decisión. Ampliar la planta en este contexto es una apuesta muy riesgosa."
+      ],
+      "limites": {
+        "precioMin": 80,
+        "precioMax": 90,
+        "marketingMin": 0,
+        "marketingMax": 9000,
+        "investigacionMax": 6000,
+        "ampliacionMax": 5000
+      },
+      "cambiosEconomia": {
+        "bancos": [{ "tasaAnual": 33 }, { "tasaAnual": 44, "maximoCredito": 70000 }]
+      },
+      "tags": ["crisis", "recesion"],
+      "demanda": { "crecimiento": 0.84, "precioReferencia": 86, "pesoID": 0.1 }
+    },
+    {
+      "numero": 4,
+      "ronda": "FINAL",
+      "volanta": "PRIMERAS SEÑALES DE RECUPERACIÓN",
+      "titulo": "EL CONSUMO EMPIEZA A REPUNTAR",
+      "copete": "Después de dos períodos difíciles, los comercios vuelven a ver movimiento.",
+      "noticia": [
+        "Los datos del último cuatrimestre muestran que lo peor ya pasó. El consumo todavía está por debajo de lo que era antes de la crisis, pero las ventas empezaron a crecer de a poco.",
+        "Los bancos mantienen sus tasas altas, aunque se espera que las bajen si la recuperación se confirma. El costo de los repuestos también subió: la tasa de mantenimiento de las plantas pasa del 10% al 12%.",
+        "Las empresas que llegaron a este período sin deudas excesivas y sin el depósito lleno están en mejores condiciones para aprovechar la recuperación."
+      ],
+      "limites": {
+        "precioMin": 82,
+        "precioMax": 92,
+        "marketingMin": 0,
+        "marketingMax": 10000,
+        "investigacionMax": 8000,
+        "ampliacionMax": 10000
+      },
+      "cambiosEconomia": { "tasaMantenimiento": 12 },
+      "tags": ["recuperacion"],
+      "demanda": { "crecimiento": 0.92, "precioReferencia": 87, "pesoID": 0.15 }
+    },
+    {
+      "numero": 5,
+      "ronda": "FINAL",
+      "volanta": "LA ECONOMÍA SE NORMALIZA",
+      "titulo": "VUELVEN LAS VENTAS DE URBAN",
+      "copete": "La recuperación se confirma y los bancos bajan sus tasas.",
+      "noticia": [
+        "El consumo se recuperó y los monopatines URBAN vuelven a venderse a buen ritmo, impulsados también por el aumento del precio del transporte público.",
+        "Con una economía más estable, el Banco {banco1} bajó su tasa al 28% y el Banco {banco2} al 38%. El máximo de crédito del Banco {banco2} vuelve a ser de U$S 75.000.",
+        "Los gerentes deben tener en cuenta que las inversiones en planta, capacitación e investigación recién dan resultado en el período siguiente."
+      ],
+      "limites": {
+        "precioMin": 85,
+        "precioMax": 95,
+        "marketingMin": 0,
+        "marketingMax": 10000,
+        "investigacionMax": 10000,
+        "ampliacionMax": 10000
+      },
+      "cambiosEconomia": {
+        "bancos": [{ "tasaAnual": 28 }, { "tasaAnual": 38, "maximoCredito": 75000 }]
+      },
+      "tags": ["recuperacion", "crecimiento"],
+      "demanda": { "crecimiento": 1.0, "precioReferencia": 89, "pesoID": 0.15 }
+    },
+    {
+      "numero": 6,
+      "ronda": "FINAL",
+      "volanta": "PERÍODO EXTRA",
+      "titulo": "UN MERCADO MÁS TRANQUILO",
+      "copete": "Las ventas se estabilizan en niveles parecidos a los de antes de la crisis.",
+      "noticia": [
+        "El mercado de los monopatines se estabilizó. No se esperan grandes cambios en la demanda ni en las condiciones de los bancos.",
+        "Este período existe solo en la versión de 6 períodos."
+      ],
+      "limites": {
+        "precioMin": 85,
+        "precioMax": 95,
+        "marketingMin": 0,
+        "marketingMax": 10000,
+        "investigacionMax": 10000,
+        "ampliacionMax": 10000
+      },
+      "tags": [],
+      "demanda": { "crecimiento": 1.02, "precioReferencia": 89, "pesoID": 0.15 }
+    }
+  ]
+}

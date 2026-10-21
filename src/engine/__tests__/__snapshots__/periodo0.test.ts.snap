@@ -1,0 +1,96 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Caso de prueba 1: período 0 del manual 2026 > texto en formato certamen 1`] = `
+"            Reporte de la Compañía IGUALES para el Período
+
+                   DECISIONES TOMADAS DEL PERIODO
+                   ---------- ------- --- -------
+Precio            u$s     90     Ampliación en Planta                   u$s  10000
+Marketing         u$s   8500     Ped. de Prest. Bco   NACION            u$s  55000
+Nivel de Prod.            75%    Dev. de Prest. Bco   NACION            u$s      0
+Inv. en Capac.    u$s   4000     Ped. de Prest. Bco   PROVINCIA         u$s  65000
+Inv. en I & D     u$s   1000     Dev. de Prest. Bco   PROVINCIA         u$s      0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        BALANCE EN u$s              ESTADO DE RESULTADO EN u$s
+        ------- -- ---              ------ -- --------- -- ---
+Efectivo             115061        Ventas               108000
+                                   Costo Merc. Vend.     71964
+Stock                     0        ---------------------------
+                                   Margen Bruto          36036
+Planta                90000        Recursos Humanos       6000
+---------------------------        Marketing              8500
+Total Activo         205061        Mantenimiento          8000
+---------------------------        Capacitación           4000
+Prestamos            120000        I & D                  1000
+                                   Indemnizaciones           0
+Ut. Acumuladas         5061        Mantenimiento Stock       0
+                                   Intereses             12750
+Capital               80000        Penalidad                 0
+                                   ---------------------------
+---------------------------        Util. ante Imp.        7786
+Pasivo+Patrimonio    205061        Impuestos              2725
+                                   ---------------------------
+                                   Util. del Período      5061
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                   INFORME PRIVADO DE LA EMPRESA
+                   ------- ------- -- -- -------
+  Reporte de Producción           Reporte de Marketing en Unid.
+  ------- -- ----------           ------- -- --------- -- -----
+Cap. de la Planta      1600        Ordenes Recibidas       1346
+Producción             1200        Ventas realizadas       1200
+Nivel Utilizado          75%       Ordenes no realiz.       146
+Prod. Costo/Unid.     59.97        Stock en Unidades          0
+Empleados                60
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                      REPORTE DE CREDITOS
+                      ------- -- --------
+    Banco NACION                             Banco PROVINCIA
+Máximo Crédito     u$s  90000        Máximo Crédito      u$s  75000
+Tasa de Interés         27.00        Tasa de Interés          36.00
+Préstamos Tomados  u$s  55000        Préstamos Tomados   u$s  65000
+Prést. Adicional   u$s      0        Prést. Adicional    u$s      0
+                                     Giro en Descub.     u$s      0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+VALORES DEL PROXIMO PERIODO
+------- --- ------- -------
+Capac. Acumulada   u$s   4000
+Planta             u$s  90000
+Cap. de Prod (100%)      1800
+I&D Acumulado      u$s   1000"
+`;
+
+exports[`Caso de prueba 1: período 0 del manual 2026 > texto en formato certamen 2`] = `
+"            Informe Industrial de la Zona 1 para el Período 0
+
+      UNIDADES                                               DOLARES
+      --------                                               -------
+Capacidad Total                       6400               Ingreso por vtas    u$s     432000
+Total Producido                       4800               Precio Promedio     u$s         90
+Total Ord. Recibidas                  5384               Costo Prod. Prom.   u$s      59.97
+Total Vendido                         4800
+Stock Total                              0
+
+      PRODUCTIVIDAD                                          ECONOMIA
+      -------------                                          --------
+Cant. Empleados                        240               Banco NACION
+Ventas/Empleado     u$s               1800               *Préstamo Límite    u$s      90000
+Capac. Prom. Utiliz.  %                 75               *Tasa Prima                  27.00
+                                                         Banco PROVINCIA
+Inv. y des. acum.   u$s                  0               *Préstamo Límite    u$s      75000
+                                                         *Tasa Prima                  36.00
+                                                         Limite Giro Desc.   u$s      10000
+
+                                                         Tasa de Impuesto      %         35
+                                                         Tasa de Mantenimiento %         10
+                                                         Mantenim. de Stock  u$s         10 c/u
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                              INFORME DE COMPETICION
+                              ------- -- -----------
+Nombre              Ventas     Precio     UnidVend     UtilPeri      UtilAcum    %Mercado Pos.
+---------------    --------   --------    --------    ---------     ---------   --------- ----
+CUARENTENA           108000         90        1200         5061          5061         25    -
+FOREX                108000         90        1200         5061          5061         25    -
+GOUP                 108000         90        1200         5061          5061         25    -
+NACIONAL2020         108000         90        1200         5061          5061         25    -"
+`;
