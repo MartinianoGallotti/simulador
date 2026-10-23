@@ -65,7 +65,7 @@ Estados posibles:
 
 | # | Supuesto | Estado | Dónde |
 |---|---|---|---|
-| 29 | Del escenario HOLTEC solo el período 1 es real (manual 2026). Los comentarios 2 a 6, el crecimiento del mercado de cada período y los cambios de tasas, impuesto y mantenimiento son inventados. Los escenarios URBAN (recesión) y SONAR (calidad) son inventados enteros. Los tres arrancan con el mismo período 0 del manual. | Supuesto | `escenarios/*.json` |
+| 29 | Del escenario HOLTEC solo el período 1 es real (manual 2026). Los comentarios 2 a 7, el crecimiento del mercado de cada período y los cambios de tasas, impuesto y mantenimiento son inventados. Los escenarios URBAN (recesión) y SONAR (calidad) son inventados enteros. Los tres arrancan con el mismo período 0 del manual. | Supuesto | `escenarios/*.json` |
 | 30 | El "crecimiento" de cada período es el tamaño del mercado comparado con el período 0 (no es acumulado). Ejemplo: HOLTEC va de 1,08 en el período 1 a 1,36 en el 5. | Supuesto | `escenarios/*.json`, `mercado.ts` |
 | 31 | En la hoja de trabajo el efectivo se copia redondeado, como figura en el reporte. El fondo fijo (mínimo 50) cubre la diferencia de centavos. | Supuesto | `hojaDeTrabajo.ts` |
 | 32 | Los bots juegan solo con la información que tiene un equipo: su reporte, el industrial y los límites y "tags" del comentario (boom, recesión, crisis, calidad, inflación…). No ven el crecimiento real del mercado. | Decisión de diseño | `bots/comun.ts` |

@@ -25,8 +25,8 @@ El usuario es Marti. Habla español rioplatense y la interfaz va en español rio
 ## Reglas del juego (confirmadas por el material)
 
 ### Estructura
-- Zona de N empresas (en el certamen son 4; configurable de 3 a 8). Nombre de la empresa: hasta 10 caracteres, sin símbolos.
-- Cantidad de períodos configurable: **5 por defecto** (manual 2026); el video dice 6.
+- Zona de N empresas (en el certamen son 4; configurable de 3 a 12). Nombre de la empresa: hasta 10 caracteres, sin símbolos.
+- Cantidad de períodos configurable: **5 por defecto** (manual 2026); el video dice 6. Se permite hasta 7 (Marti jugó una instancia a 7 períodos).
 - Se arranca con el **Reporte del Período 0**, igual para todos. Sus "decisiones tomadas" son arbitrarias, puestas por los organizadores.
 - Cada período el jugador recibe:
   - el **Comentario Económico N°t**: noticia del mercado más los límites de las decisiones del período t;

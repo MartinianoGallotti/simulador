@@ -15,8 +15,8 @@ const DIFICULTADES: { valor: Dificultad; nombre: string; detalle: string }[] = [
   { valor: 'dificil', nombre: 'Difícil', detalle: 'Bots que hacen bien las cuentas y leen el comentario. Sin novatos.' },
 ];
 
-/** Una zona tiene como máximo 8 empresas. */
-const MAX_EMPRESAS = 8;
+/** Una zona tiene como máximo 12 empresas. */
+const MAX_EMPRESAS = 12;
 
 export function NuevaPartida({ onCrear, onCancelar }: Props) {
   const config = leerConfig();
@@ -203,13 +203,13 @@ export function NuevaPartida({ onCrear, onCancelar }: Props) {
           <div className="campo">
             <span className="etiqueta">Cantidad de períodos</span>
             <div className="opciones" role="group" aria-label="Cantidad de períodos">
-              {[3, 4, 5, 6].map((n) => (
+              {[3, 4, 5, 6, 7].map((n) => (
                 <button key={n} type="button" className="opcion" aria-pressed={periodos === n} onClick={() => setPeriodos(n)}>
                   {n}
                 </button>
               ))}
             </div>
-            <span className="ayuda">El certamen 2026 dura 5 períodos.</span>
+            <span className="ayuda">El manual 2026 habla de 5 períodos, pero hay instancias que se juegan a 7.</span>
           </div>
 
           <label className="campo" style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>

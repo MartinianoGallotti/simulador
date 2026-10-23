@@ -8,12 +8,21 @@
     "capacitacionAcumulada": 0,
     "idAcumulado": 0,
     "empleados": 0,
-    "prestamosTomados": [55000, 65000]
+    "prestamosTomados": [
+      55000,
+      65000
+    ]
   },
   "economiaInicial": {
     "bancos": [
-      { "maximoCredito": 90000, "tasaAnual": 27 },
-      { "maximoCredito": 75000, "tasaAnual": 36 }
+      {
+        "maximoCredito": 90000,
+        "tasaAnual": 27
+      },
+      {
+        "maximoCredito": 75000,
+        "tasaAnual": 36
+      }
     ],
     "tasaImpuesto": 35,
     "tasaMantenimiento": 10,
@@ -28,11 +37,22 @@
       "investigacion": 1000,
       "capacitacion": 4000,
       "ampliacion": 10000,
-      "pedidos": [0, 0],
-      "devoluciones": [0, 0],
+      "pedidos": [
+        0,
+        0
+      ],
+      "devoluciones": [
+        0,
+        0
+      ],
       "nivel": 75
     },
-    "decisionesMostradas": { "pedidos": [55000, 65000] }
+    "decisionesMostradas": {
+      "pedidos": [
+        55000,
+        65000
+      ]
+    }
   },
   "periodos": [
     {
@@ -54,8 +74,13 @@
         "investigacionMax": 10000,
         "ampliacionMax": 15000
       },
-      "tags": ["crecimiento"],
-      "demanda": { "crecimiento": 1.04, "pesoID": 0.2 }
+      "tags": [
+        "crecimiento"
+      ],
+      "demanda": {
+        "crecimiento": 1.04,
+        "pesoID": 0.2
+      }
     },
     {
       "numero": 2,
@@ -76,8 +101,14 @@
         "investigacionMax": 8000,
         "ampliacionMax": 10000
       },
-      "tags": ["recesion"],
-      "demanda": { "crecimiento": 0.94, "precioReferencia": 88, "pesoID": 0.1 }
+      "tags": [
+        "recesion"
+      ],
+      "demanda": {
+        "crecimiento": 0.94,
+        "precioReferencia": 88,
+        "pesoID": 0.1
+      }
     },
     {
       "numero": 3,
@@ -99,10 +130,25 @@
         "ampliacionMax": 5000
       },
       "cambiosEconomia": {
-        "bancos": [{ "tasaAnual": 33 }, { "tasaAnual": 44, "maximoCredito": 70000 }]
+        "bancos": [
+          {
+            "tasaAnual": 33
+          },
+          {
+            "tasaAnual": 44,
+            "maximoCredito": 70000
+          }
+        ]
       },
-      "tags": ["crisis", "recesion"],
-      "demanda": { "crecimiento": 0.84, "precioReferencia": 86, "pesoID": 0.1 }
+      "tags": [
+        "crisis",
+        "recesion"
+      ],
+      "demanda": {
+        "crecimiento": 0.84,
+        "precioReferencia": 86,
+        "pesoID": 0.1
+      }
     },
     {
       "numero": 4,
@@ -123,9 +169,17 @@
         "investigacionMax": 8000,
         "ampliacionMax": 10000
       },
-      "cambiosEconomia": { "tasaMantenimiento": 12 },
-      "tags": ["recuperacion"],
-      "demanda": { "crecimiento": 0.92, "precioReferencia": 87, "pesoID": 0.15 }
+      "cambiosEconomia": {
+        "tasaMantenimiento": 12
+      },
+      "tags": [
+        "recuperacion"
+      ],
+      "demanda": {
+        "crecimiento": 0.92,
+        "precioReferencia": 87,
+        "pesoID": 0.15
+      }
     },
     {
       "numero": 5,
@@ -147,20 +201,35 @@
         "ampliacionMax": 10000
       },
       "cambiosEconomia": {
-        "bancos": [{ "tasaAnual": 28 }, { "tasaAnual": 38, "maximoCredito": 75000 }]
+        "bancos": [
+          {
+            "tasaAnual": 28
+          },
+          {
+            "tasaAnual": 38,
+            "maximoCredito": 75000
+          }
+        ]
       },
-      "tags": ["recuperacion", "crecimiento"],
-      "demanda": { "crecimiento": 1.0, "precioReferencia": 89, "pesoID": 0.15 }
+      "tags": [
+        "recuperacion",
+        "crecimiento"
+      ],
+      "demanda": {
+        "crecimiento": 1.0,
+        "precioReferencia": 89,
+        "pesoID": 0.15
+      }
     },
     {
       "numero": 6,
       "ronda": "FINAL",
-      "volanta": "PERÍODO EXTRA",
+      "volanta": "UN AÑO MÁS TRANQUILO",
       "titulo": "UN MERCADO MÁS TRANQUILO",
       "copete": "Las ventas se estabilizan en niveles parecidos a los de antes de la crisis.",
       "noticia": [
         "El mercado de los monopatines se estabilizó. No se esperan grandes cambios en la demanda ni en las condiciones de los bancos.",
-        "Este período existe solo en la versión de 6 períodos."
+        "Las empresas que llegaron con la planta justa y sin deudas caras están en la mejor posición para lo que viene."
       ],
       "limites": {
         "precioMin": 85,
@@ -171,7 +240,50 @@
         "ampliacionMax": 10000
       },
       "tags": [],
-      "demanda": { "crecimiento": 1.02, "precioReferencia": 89, "pesoID": 0.15 }
+      "demanda": {
+        "crecimiento": 1.02,
+        "precioReferencia": 89,
+        "pesoID": 0.15
+      }
+    },
+    {
+      "numero": 7,
+      "ronda": "FINAL",
+      "volanta": "LA ECONOMÍA VUELVE A CRECER",
+      "titulo": "LOS BANCOS BAJAN LAS TASAS",
+      "copete": "Con la economía en crecimiento, el crédito vuelve a ser más barato.",
+      "noticia": [
+        "Los últimos datos confirman que la economía volvió a crecer. Las familias recuperan su capacidad de compra y los monopatines URBAN se venden más que antes de la crisis.",
+        "Acompañando el buen momento, el Banco {banco1} bajó su tasa de interés anual al 27% y el Banco {banco2} al 36%, los mismos valores que al comienzo del año.",
+        "Los especialistas recomiendan aprovechar el crecimiento sin repetir los errores del pasado: fabricar lo que se puede vender y no endeudarse más de lo necesario."
+      ],
+      "limites": {
+        "precioMin": 86,
+        "precioMax": 96,
+        "marketingMin": 0,
+        "marketingMax": 10000,
+        "investigacionMax": 10000,
+        "ampliacionMax": 10000
+      },
+      "cambiosEconomia": {
+        "bancos": [
+          {
+            "tasaAnual": 27
+          },
+          {
+            "tasaAnual": 36
+          }
+        ]
+      },
+      "tags": [
+        "crecimiento",
+        "recuperacion"
+      ],
+      "demanda": {
+        "crecimiento": 1.08,
+        "precioReferencia": 90,
+        "pesoID": 0.15
+      }
     }
   ]
 }

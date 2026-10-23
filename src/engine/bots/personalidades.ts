@@ -218,9 +218,9 @@ export function decidirBot(personalidad: Personalidad, ctx: ContextoBot): Decisi
 
 /** Qué bots hay en la zona según la dificultad (se toman los primeros y se mezclan). */
 const PLANTELES: Record<Dificultad, Personalidad[]> = {
-  facil: ['novato', 'conservador', 'imitador', 'novato', 'calidad', 'conservador', 'novato'],
-  normal: ['racional', 'conservador', 'agresivo', 'imitador', 'calidad', 'novato', 'racional'],
-  dificil: ['racional', 'agresivo', 'calidad', 'racional', 'imitador', 'agresivo', 'conservador'],
+  facil: ['novato', 'conservador', 'imitador', 'novato', 'calidad', 'conservador', 'novato', 'imitador', 'racional', 'conservador', 'novato'],
+  normal: ['racional', 'conservador', 'agresivo', 'imitador', 'calidad', 'novato', 'racional', 'agresivo', 'calidad', 'conservador', 'imitador'],
+  dificil: ['racional', 'agresivo', 'calidad', 'racional', 'imitador', 'agresivo', 'conservador', 'calidad', 'racional', 'imitador', 'agresivo'],
 };
 
 export function armarPlantel(dificultad: Dificultad, cantidad: number, rng: Rng): Personalidad[] {

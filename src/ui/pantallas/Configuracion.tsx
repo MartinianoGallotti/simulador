@@ -69,8 +69,8 @@ export function Configuracion({ onVolver }: Props) {
 
         <section className="tarjeta">
           <h3>Reglas del certamen</h3>
-          <Fila etiqueta="Períodos por partida" ayuda="El manual 2026 dice 5; el video de 2014, 6." id="cfg-periodos">
-            <CampoNumero id="cfg-periodos" valor={r.cantidadPeriodos} onCambio={(v) => reglas({ cantidadPeriodos: Math.min(6, Math.max(1, v)) })} />
+          <Fila etiqueta="Períodos por partida" ayuda="El manual 2026 dice 5; el video de 2014, 6. Se puede hasta 7." id="cfg-periodos">
+            <CampoNumero id="cfg-periodos" valor={r.cantidadPeriodos} onCambio={(v) => reglas({ cantidadPeriodos: Math.min(7, Math.max(1, v)) })} />
           </Fila>
           <Fila etiqueta="Fondo fijo mínimo" ayuda="Manual 2026: 50. Video: 100." id="cfg-ff">
             <CampoNumero id="cfg-ff" valor={r.fondoFijoMinimo} onCambio={(v) => reglas({ fondoFijoMinimo: v })} />

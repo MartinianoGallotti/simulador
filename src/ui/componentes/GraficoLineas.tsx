@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 
 /** Paleta categórica validada (orden fijo: el color sigue a la empresa, nunca al puesto). */
 export const COLORES_SERIES = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300', '#6250d6', '#e34948'];
+/** Para las series que no entran en la paleta (zonas de más de 8 empresas). */
+export const COLOR_RESTO = '#a3acb8';
 
 export interface Serie {
   nombre: string;

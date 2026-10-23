@@ -14,6 +14,10 @@ import {
 import type { Dificultad } from '../bots/comun';
 import { sugerirFinanciamiento } from '../hojaDeTrabajo';
 import { datosDePartida, type Partida } from '../partida';
+import { ESCENARIOS } from '../escenarios';
+import { crearRng } from '../azar';
+import { decidirBot } from '../bots/personalidades';
+import { comentarioDelPeriodo } from '../partida';
 import type { Decisiones } from '../tipos';
 
 /** Un jugador prolijo: repite precio y marketing, no invierte y cierra la hoja de trabajo. */
@@ -93,6 +97,49 @@ describe('partida para un jugador', () => {
           expect(r.quebrada).toBe(false);
         });
       }
+    }
+  });
+});
+
+/** Jugada del racional para el jugador: sirve para probar partidas largas sin que el jugador quiebre. */
+function jugadaRacional(p: Partida): Decisiones {
+  const numero = periodoActual(p);
+  const anterior = p.historial[numero - 1].resultado;
+  return decidirBot('racional', {
+    indice: p.indiceJugador,
+    nombre: p.nombres[p.indiceJugador],
+    estado: estadoJugador(p),
+    anterior: anterior.empresas[p.indiceJugador],
+    industrial: anterior.industrial,
+    datos: datosDePartida(p, numero),
+    tags: comentarioDelPeriodo(p, numero).tags ?? [],
+    periodosRestantes: p.config.cantidadPeriodos - numero + 1,
+    reglas: p.config.reglas,
+    rng: crearRng(numero),
+    dificultad: 'normal',
+  });
+}
+
+describe('zonas grandes y partidas largas', () => {
+  it('12 empresas (11 bots) durante 7 períodos: se juega entera y los bots no quedan penalizados', () => {
+    for (const escenarioId of ['holtec', 'recesion', 'calidad']) {
+      let p = crearPartida(config({ cantidadBots: 11, cantidadPeriodos: 7, escenarioId, semilla: 31 }));
+      expect(new Set(p.nombres).size).toBe(12);
+      while (!partidaTerminada(p)) p = jugarPeriodo(p, jugadaRacional(p));
+      expect(p.historial).toHaveLength(8);
+      expect(ranking(p)).toHaveLength(12);
+      for (const periodo of p.historial.slice(1)) {
+        periodo.resultado.empresas.forEach((r, i) => {
+          if (i === p.indiceJugador || !r || personalidadDe(p, i) === 'novato') return;
+          expect(r.resultados.penalidad, `${escenarioId}: ${r.nombre} período ${periodo.numero}`).toBe(0);
+        });
+      }
+    }
+  });
+
+  it('los tres escenarios tienen comentario propio hasta el período 7', () => {
+    for (const e of ESCENARIOS) {
+      for (let n = 1; n <= 7; n++) expect(e.periodos.some((x) => x.numero === n), `${e.id} período ${n}`).toBe(true);
     }
   });
 });

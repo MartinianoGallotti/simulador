@@ -1,5 +1,5 @@
 import { type Partida } from '../../engine';
-import { COLORES_SERIES, GraficoLineas, type Serie } from '../componentes/GraficoLineas';
+import { COLOR_RESTO, COLORES_SERIES, GraficoLineas, type Serie } from '../componentes/GraficoLineas';
 import { costo, num, plata } from '../formato';
 
 /** Gráficos de evolución período a período. */
@@ -12,7 +12,12 @@ export function PestanaEvolucion({ partida }: { partida: Partida }) {
   const j = partida.indiceJugador;
   const yo = h.map((x) => x.resultado.empresas[j]);
   // El jugador siempre usa el primer color; los bots, los siguientes en orden fijo.
-  const colorDe = (i: number) => (i === j ? COLORES_SERIES[0] : COLORES_SERIES[1 + ((i < j ? i : i - 1) % (COLORES_SERIES.length - 1))]);
+  // Con más de 8 empresas no se repiten colores: las que no entran en la paleta van en gris.
+  const colorDe = (i: number) => {
+    if (i === j) return COLORES_SERIES[0];
+    const k = 1 + (i < j ? i : i - 1);
+    return k < COLORES_SERIES.length ? COLORES_SERIES[k] : COLOR_RESTO;
+  };
 
   const utilidades: Serie[] = partida.nombres.map((nombre, i) => ({
     nombre: i === j ? `${nombre} (vos)` : nombre,

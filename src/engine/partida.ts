@@ -15,7 +15,7 @@ import { decisionesVacias, type Decisiones, type EstadoEmpresa } from './tipos';
 export type ModoPartida = 'entrenamiento' | 'examen';
 
 /** Duración de cada período en el modo examen (minutos). El video dice ~30 el primero y después menos. */
-export const MINUTOS_POR_PERIODO = [30, 25, 20, 15, 15, 15];
+export const MINUTOS_POR_PERIODO = [30, 25, 20, 15, 15, 15, 15];
 
 export interface ConfigPartida {
   /** Entrenamiento: con ayudas. Examen: hoja manual, sin ayudas y con tiempo. */
@@ -63,7 +63,10 @@ export interface Partida {
   historial: PeriodoJugado[];
 }
 
-const NOMBRES_BOTS = ['ALFA', 'DELTA', 'ZENIT', 'NOVA', 'ORION', 'ATLAS', 'FENIX', 'TITAN', 'VEGA', 'KRONOS', 'POLARIS', 'CENIT'];
+const NOMBRES_BOTS = [
+  'ALFA', 'DELTA', 'ZENIT', 'NOVA', 'ORION', 'ATLAS', 'FENIX', 'TITAN', 'VEGA', 'KRONOS', 'POLARIS', 'CENIT',
+  'SIRIO', 'LYNX', 'AURORA', 'DRACO', 'HELIOS', 'NEXO', 'OMNIA', 'PULSAR', 'QUANTA', 'RIGEL',
+];
 
 export function crearPartida(config: ConfigPartida): Partida {
   const escenario = buscarEscenario(config.escenarioId);
