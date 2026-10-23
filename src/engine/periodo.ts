@@ -1,5 +1,6 @@
 // procesarPeriodo(zona, decisiones, datos del período) → nuevos reportes.
 
+import { ajustarDemanda, ajustarLimites, type Arranque } from './arranque';
 import { crearRng } from './azar';
 import { LIMITES_LIBRES, type ConfigReglas, type Economia, type Limites } from './config';
 import { corregirDecisiones } from './decisiones';
@@ -37,8 +38,13 @@ export interface ResultadoPeriodo {
 }
 
 /** Arma la zona al inicio del período 0: todas las empresas iguales. */
-export function crearZona(escenario: Escenario, nombres: string[], reglas: ConfigReglas, numero = 1): Zona {
-  const ini = escenario.estadoInicial;
+export function crearZona(
+  escenario: Escenario,
+  nombres: string[],
+  reglas: ConfigReglas,
+  numero = 1,
+  ini: Escenario['estadoInicial'] = escenario.estadoInicial,
+): Zona {
   return {
     numero,
     empresas: nombres.map((nombre) => ({
@@ -61,13 +67,21 @@ export function crearZona(escenario: Escenario, nombres: string[], reglas: Confi
 }
 
 /** Datos del período `numero` según el escenario (el 0 usa las decisiones de los organizadores). */
-export function datosDelPeriodo(escenario: Escenario, numero: number, reglas?: Pick<ConfigReglas, 'economia'>): DatosPeriodo {
-  const economia = economiaDelPeriodo(escenario, numero, reglas?.economia);
+export function datosDelPeriodo(
+  escenario: Escenario,
+  numero: number,
+  reglas?: Pick<ConfigReglas, 'economia'>,
+  arranque?: Arranque,
+): DatosPeriodo {
+  const economia = economiaDelPeriodo(escenario, numero, reglas?.economia, arranque?.economia);
   if (numero === 0) {
     return { numero, limites: LIMITES_LIBRES, economia, demanda: { crecimiento: 1, ...escenario.periodo0.demanda } };
   }
   const p = periodoOProvisorio(escenario, numero);
-  return { numero, limites: p.limites, economia, demanda: { crecimiento: 1, ...p.demanda } };
+  const demanda = { crecimiento: 1, ...p.demanda };
+  return arranque
+    ? { numero, limites: ajustarLimites(p.limites, arranque), economia, demanda: ajustarDemanda(demanda, arranque) }
+    : { numero, limites: p.limites, economia, demanda };
 }
 
 export function procesarPeriodo(

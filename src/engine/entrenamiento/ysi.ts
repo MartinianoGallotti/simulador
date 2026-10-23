@@ -3,7 +3,7 @@
 // el mismo tamaño que el período anterior (el crecimiento real del período es información oculta).
 
 import type { ResultadoEmpresa } from '../empresa';
-import { datosDePartida, periodoActual, ultimoPeriodo, type Partida } from '../partida';
+import { datosDePartida, parametrosDemandaDe, periodoActual, ultimoPeriodo, type Partida } from '../partida';
 import { procesarPeriodo } from '../periodo';
 import type { Decisiones } from '../tipos';
 
@@ -22,7 +22,10 @@ export function simularYSi(p: Partida, decisiones: Decisiones): ResultadoYSi {
   const todas = anterior.resultado.zona.empresas.map((_, i) =>
     i === p.indiceJugador ? decisiones : anterior.decisiones[i],
   );
-  const res = procesarPeriodo(anterior.resultado.zona, todas, supuestos, p.config.reglas, { semilla: p.config.semilla });
+  const res = procesarPeriodo(anterior.resultado.zona, todas, supuestos, p.config.reglas, {
+    semilla: p.config.semilla,
+    parametrosDemanda: parametrosDemandaDe(p),
+  });
   return {
     resultado: res.empresas[p.indiceJugador]!,
     precioPromedioZona: res.industrial.dolares.precioPromedio,

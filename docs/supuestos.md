@@ -90,6 +90,15 @@ Estados posibles:
 | 41 | La configuración cambia la economía inicial de todos los escenarios; los cambios que anuncia cada comentario se aplican encima. Solo afecta a las partidas nuevas. | Decisión de diseño | `escenarios/index.ts`, `ui/almacen.ts` |
 | 42 | Los cupones entregados en el modo moderador quedan guardados en el navegador hasta que se procesa el período. La pantalla no los muestra, pero alguien que sepa usar las herramientas del navegador podría verlos: es una práctica, no un certamen oficial. | Decisión de diseño | `partida.ts` |
 
+## Arranque al azar
+
+| # | Supuesto | Estado | Dónde |
+|---|---|---|---|
+| 43 | Rangos del arranque al azar: planta de 60.000 a 110.000, precio de 84 a 98, marketing de 6.000 a 11.000, tasas de 18% a 30% (el otro banco, 4 a 12 puntos más caro), impuesto de 30% a 40%, mantenimiento de 8% a 13%, stock de 8 a 12 por unidad. El efectivo alcanza justo para las decisiones del período 0 y los préstamos salen de que el balance cierre. | Supuesto | `arranque.ts` |
+| 44 | Para que el arranque sea jugable, los gastos fijos iniciales (intereses + mantenimiento) no pasan el 21% de las ventas del período 0 (en el manual son el 19%). | Decisión de diseño | `arranque.ts` |
+| 45 | Con arranque al azar, los cambios que anuncia cada comentario se aplican como diferencias ("la tasa sube 4 puntos") y los textos muestran los números de la partida. Los límites de precio se corren según el precio inicial; los de marketing y ampliación se escalan. | Decisión de diseño | `escenarios/index.ts`, `arranque.ts` |
+| 46 | Si un bot perdió plata y casi no le queda margen en los bancos, juega a sobrevivir (como el racional, sin invertir). Aun así, una empresa que ya no puede pagar ni el mantenimiento ni los intereses queda penalizada: pasa en unas 2 de cada 1.000 empresas bot con arranque al azar, en recesión. | Decisión de diseño | `bots/personalidades.ts` |
+
 ## Valores elegidos donde el video y el manual no coinciden (manda el manual)
 
 - Períodos: 5 (el video dice 6).

@@ -120,7 +120,7 @@
       "noticia": [
         "Una marca internacional comenzó a vender en el país auriculares similares a los SONAR. Por ahora llegan en pocas cantidades y a un precio alto, pero se estima que se quedarán con alrededor del 8% de las ventas totales.",
         "Para no perder clientes frente a los importados, los especialistas recomiendan a los fabricantes locales seguir mejorando la calidad de sus productos y no descuidar la publicidad.",
-        "El aumento en el costo de los componentes electrónicos hizo que la tasa de mantenimiento de las plantas pase del 10% al 12%."
+        "El aumento en el costo de los componentes electrónicos hizo que la tasa de mantenimiento de las plantas pase del {mantenimiento_antes}% al {mantenimiento}%."
       ],
       "limites": {
         "precioMin": 88,
@@ -151,7 +151,7 @@
       "titulo": "LOS BANCOS APUESTAN A LA TECNOLOGÍA",
       "copete": "Los bancos amplían sus líneas de crédito para las empresas del sector.",
       "noticia": [
-        "Con el objetivo de que la industria local pueda competir con los productos importados, el Banco {banco1} amplió su máximo de crédito a U$S 110.000 y el Banco {banco2} a U$S 90.000. Las tasas de interés se mantienen sin cambios.",
+        "Con el objetivo de que la industria local pueda competir con los productos importados, el Banco {banco1} amplió su máximo de crédito a U$S {max1} y el Banco {banco2} a U$S {max2}. Las tasas de interés se mantienen sin cambios.",
         "Los importados siguen presentes en el mercado, aunque su participación no creció. Los consumidores continúan eligiendo los auriculares de mejor calidad.",
         "Se aconseja a los gerentes no tomar más créditos de los que necesitan: un préstamo que no se usa solamente genera intereses."
       ],

@@ -28,6 +28,7 @@ export function NuevaPartida({ onCrear, onCancelar }: Props) {
   const [escenarioId, setEscenarioId] = useState(ESCENARIOS[0].id);
   const [periodos, setPeriodos] = useState(reglas.cantidadPeriodos);
   const [conRuido, setConRuido] = useState(true);
+  const [arranqueAlAzar, setArranqueAlAzar] = useState(false);
   const [modo, setModo] = useState<ModoPartida>('entrenamiento');
   const [tocado, setTocado] = useState(false);
 
@@ -66,6 +67,7 @@ export function NuevaPartida({ onCrear, onCancelar }: Props) {
         cantidadPeriodos: periodos,
         semilla: Math.floor(Math.random() * 1_000_000_000),
         conRuido,
+        arranqueAlAzar,
         reglas,
       }),
     );
@@ -216,6 +218,18 @@ export function NuevaPartida({ onCrear, onCancelar }: Props) {
             <input type="checkbox" checked={conRuido} onChange={(e) => setConRuido(e.target.checked)} />
             <span>Demanda con un poco de azar (±2%), como en la vida real</span>
           </label>
+
+          <div className="campo">
+            <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 400 }}>
+              <input type="checkbox" checked={arranqueAlAzar} onChange={(e) => setArranqueAlAzar(e.target.checked)} />
+              <span>Arranque al azar</span>
+            </label>
+            <span className="ayuda">
+              {arranqueAlAzar
+                ? 'Cada partida empieza distinto: planta, préstamos, tasas y máximos de los bancos, impuesto, mantenimiento y las decisiones del período 0. Los límites del comentario se acomodan a ese arranque. Todas las empresas de la zona arrancan iguales.'
+                : 'Sin tildar, se arranca como en el manual 2026: planta 80.000, préstamos 55.000 y 65.000, precio 90.'}
+            </span>
+          </div>
 
           <div className="modal-acciones">
             <button type="button" className="boton" onClick={onCancelar}>

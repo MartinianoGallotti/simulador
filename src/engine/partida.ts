@@ -2,11 +2,13 @@
 // (modo individual) o varios que juegan por turnos en el mismo dispositivo (modo moderador).
 // Todo es inmutable: cada función devuelve una partida nueva (sirve para deshacer y guardar).
 
+import { generarArranque, ajustarLimites, type Arranque } from './arranque';
 import { crearRng } from './azar';
 import type { Dificultad } from './bots/comun';
 import { armarPlantel, decidirBot, type Personalidad } from './bots/personalidades';
-import type { ConfigReglas } from './config';
+import { combinarEconomia, type ConfigReglas } from './config';
 import type { ResultadoEmpresa } from './empresa';
+import { PARAMETROS_DEMANDA, type ParametrosDemanda } from './mercado';
 import { buscarEscenario, periodoOProvisorio, type PeriodoEscenario } from './escenarios';
 import { crearZona, datosDelPeriodo, procesarPeriodo, type DatosPeriodo, type ResultadoPeriodo, type Zona } from './periodo';
 import type { ContextoReporteCompania, FilaCompeticion } from './reportes';
@@ -32,6 +34,8 @@ export interface ConfigPartida {
   semilla: number;
   /** Ruido aleatorio de ±2% en la demanda. */
   conRuido: boolean;
+  /** Cada partida arranca en una situación distinta (planta, préstamos, tasas, precio…). */
+  arranqueAlAzar?: boolean;
   reglas: ConfigReglas;
 }
 
@@ -59,6 +63,8 @@ export interface Partida {
   equipos?: number[];
   /** Modo moderador: cupones ya entregados en el período actual, ocultos hasta procesar. */
   pendientes?: Record<number, Decisiones>;
+  /** Situación inicial cuando la partida arranca al azar (si no está, es la del manual). */
+  arranque?: Arranque;
   /** historial[0] es el período 0 (jugado por los organizadores). */
   historial: PeriodoJugado[];
 }
@@ -86,12 +92,19 @@ export function crearPartida(config: ConfigPartida): Partida {
   const personalidades = empresas.map((e) => e.personalidad);
   const equipos = humanos.map((h) => nombres.indexOf(h));
 
-  const zona = crearZona(escenario, nombres, config.reglas);
-  const decisiones = nombres.map(() => escenario.periodo0.decisiones);
-  const resultado = procesarPeriodo(zona, decisiones, datosDelPeriodo(escenario, 0, config.reglas), config.reglas, { semilla: config.semilla });
+  const arranque = config.arranqueAlAzar
+    ? generarArranque(crearRng(config.semilla * 31 + 7), config.reglas, combinarEconomia(escenario.economiaInicial, config.reglas.economia))
+    : undefined;
+  const zona = crearZona(escenario, nombres, config.reglas, 1, arranque?.estadoInicial);
+  const decisiones = nombres.map(() => arranque?.decisiones0 ?? escenario.periodo0.decisiones);
+  const resultado = procesarPeriodo(zona, decisiones, datosDelPeriodo(escenario, 0, config.reglas, arranque), config.reglas, {
+    semilla: config.semilla,
+    parametrosDemanda: parametrosConArranque(arranque),
+  });
   return {
     version: 1,
     config,
+    ...(arranque ? { arranque } : {}),
     nombres,
     indiceJugador: equipos[0],
     personalidades,
@@ -148,11 +161,30 @@ export function resultadoJugador(p: Partida, numero: number): ResultadoEmpresa |
 /** Comentario económico (noticia + límites) del período `numero`. */
 export function comentarioDelPeriodo(p: Partida, numero: number): PeriodoEscenario {
   const c = periodoOProvisorio(buscarEscenario(p.config.escenarioId), numero);
-  // Los textos dicen {banco1} y {banco2}: se reemplazan por los nombres de la configuración.
+  // Los textos usan marcadores ({banco1}, {tasa2}, {max1}, {impuesto_antes}…) que se completan
+  // con los nombres de la configuración y con la economía real de esta partida.
   const [b1, b2] = p.config.reglas.nombresBancos;
-  const t = (x: string) => x.split('{banco1}').join(b1).split('{banco2}').join(b2);
+  const eco = datosDePartida(p, numero).economia;
+  const antes = datosDePartida(p, Math.max(0, numero - 1)).economia;
+  const miles = (x: number) => Math.round(x).toLocaleString('es-AR');
+  const valores: Record<string, string> = {
+    banco1: b1,
+    banco2: b2,
+    tasa1: String(eco.bancos[0].tasaAnual),
+    tasa2: String(eco.bancos[1].tasaAnual),
+    tasa1_antes: String(antes.bancos[0].tasaAnual),
+    tasa2_antes: String(antes.bancos[1].tasaAnual),
+    max1: miles(eco.bancos[0].maximoCredito),
+    max2: miles(eco.bancos[1].maximoCredito),
+    impuesto: String(eco.tasaImpuesto),
+    impuesto_antes: String(antes.tasaImpuesto),
+    mantenimiento: String(eco.tasaMantenimiento),
+    mantenimiento_antes: String(antes.tasaMantenimiento),
+  };
+  const t = (x: string) => x.replace(/\{(\w+)\}/g, (todo, clave: string) => valores[clave] ?? todo);
   return {
     ...c,
+    limites: p.arranque ? ajustarLimites(c.limites, p.arranque) : c.limites,
     titulo: t(c.titulo),
     volanta: c.volanta && t(c.volanta),
     copete: c.copete && t(c.copete),
@@ -161,8 +193,17 @@ export function comentarioDelPeriodo(p: Partida, numero: number): PeriodoEscenar
 }
 
 export function datosDePartida(p: Partida, numero: number): DatosPeriodo {
-  const datos = datosDelPeriodo(buscarEscenario(p.config.escenarioId), numero, p.config.reglas);
+  const datos = datosDelPeriodo(buscarEscenario(p.config.escenarioId), numero, p.config.reglas, p.arranque);
   return { ...datos, demanda: { ...datos.demanda, conRuido: p.config.conRuido } };
+}
+
+function parametrosConArranque(arranque?: Arranque): ParametrosDemanda {
+  return arranque ? { ...PARAMETROS_DEMANDA, ...arranque.demanda } : PARAMETROS_DEMANDA;
+}
+
+/** Parámetros del modelo de demanda de esta partida (con arranque al azar, el mercado se calibra a ese arranque). */
+export function parametrosDemandaDe(p: Partida): ParametrosDemanda {
+  return parametrosConArranque(p.arranque);
 }
 
 /** Contexto para el texto del Reporte de la Compañía de un período ya jugado. */
@@ -172,7 +213,11 @@ export function contextoReporte(p: Partida, numero: number): ContextoReporteComp
     periodo: numero,
     nombresBancos: p.config.reglas.nombresBancos,
     ...(numero === 0
-      ? { nombreEnTitulo: escenario.periodo0.nombreEnReporte, decisionesMostradas: escenario.periodo0.decisionesMostradas }
+      ? {
+          nombreEnTitulo: escenario.periodo0.nombreEnReporte,
+          // En el reporte del período 0 los préstamos iniciales figuran como pedidos.
+          decisionesMostradas: p.arranque ? { pedidos: p.arranque.estadoInicial.prestamosTomados } : escenario.periodo0.decisionesMostradas,
+        }
       : {}),
   };
 }
@@ -212,7 +257,10 @@ export function jugarPeriodoEquipos(p: Partida, porEquipo: Record<number, Decisi
       dificultad: p.config.dificultad,
     });
   });
-  const resultado = procesarPeriodo(zona, decisiones, datos, p.config.reglas, { semilla: p.config.semilla + numero });
+  const resultado = procesarPeriodo(zona, decisiones, datos, p.config.reglas, {
+    semilla: p.config.semilla + numero,
+    parametrosDemanda: parametrosDemandaDe(p),
+  });
   const siguiente: Partida = { ...p, historial: [...p.historial, { numero, decisiones, resultado }] };
   delete siguiente.pendientes;
   return siguiente;

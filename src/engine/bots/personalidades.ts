@@ -2,7 +2,8 @@
 // Salvo el novato, ninguna se deja penalizar por falta de fondos.
 
 import { entre, type Rng } from '../azar';
-import type { Decisiones } from '../tipos';
+import { capacidadPlanta } from '../produccion';
+import { unidadesEnStock, type Decisiones } from '../tipos';
 import {
   acotar,
   capacitacionUtil,
@@ -33,6 +34,11 @@ export const PERSONALIDADES: Record<Personalidad, { nombre: string; descripcion:
     descripcion: 'Se equivoca a veces: usa el Reporte de Producción, pide de más al banco, se pasa de los límites.',
   },
 };
+
+/** ¿Le quedó stock de más del 10% de su capacidad? */
+function conStock(ctx: ContextoBot): boolean {
+  return unidadesEnStock(ctx.estado.stock) > capacidadPlanta(ctx.estado.planta, ctx.reglas) * 0.1;
+}
 
 /** Fondo fijo que deja cada bot. */
 const FONDO_FIJO = 300;
@@ -80,7 +86,8 @@ function agresivo(ctx: ContextoBot): Decisiones {
     marketing,
     investigacion: investigacionBase(ctx, 1000),
     capacitacion: ultimo(ctx) ? 0 : capacitacionUtil(ctx, 4000),
-    ampliacion: ultimo(ctx) || hayTag(ctx, 'crisis') ? 0 : lim.ampliacionMax,
+    // Amplía al máximo, pero no en plena recesión ni con el depósito lleno.
+    ampliacion: ultimo(ctx) || hayTag(ctx, 'recesion', 'crisis') || conStock(ctx) ? 0 : lim.ampliacionMax,
     pedidos: [0, 0],
     devoluciones: [0, 0],
     nivel: plan.nivel,
@@ -212,7 +219,21 @@ const ESTRATEGIAS: Record<Personalidad, (ctx: ContextoBot) => Decisiones> = {
   novato,
 };
 
+/**
+ * ¿Está en apuros? Perdió plata el período pasado y casi no le queda margen en los bancos.
+ * Ahí cualquier equipo deja de lado su estilo y juega para sobrevivir.
+ */
+function enApuros(ctx: ContextoBot): boolean {
+  const a = ctx.anterior;
+  if (!a || a.resultados.utilidad >= 0) return false;
+  const margen = ctx.datos.economia.bancos.reduce((s, b, i) => s + Math.max(0, b.maximoCredito - ctx.estado.deudas[i].tomados), 0);
+  return margen < 25000 || ctx.estado.efectivo < 20000;
+}
+
 export function decidirBot(personalidad: Personalidad, ctx: ContextoBot): Decisiones {
+  // En apuros juega como el racional pero sin invertir (como si fuera el último período):
+  // fabrica lo que puede vender y cuida la plata.
+  if (enApuros(ctx)) return racional({ ...ctx, periodosRestantes: 1 });
   return ESTRATEGIAS[personalidad](ctx);
 }
 

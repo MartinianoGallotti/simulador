@@ -105,9 +105,17 @@ export function mejorPlan(
   const ruido = entre(ctx.rng, -PRECISION[ctx.dificultad].errorDemanda, PRECISION[ctx.dificultad].errorDemanda);
   const precios = opciones.precios ?? Array.from({ length: lim.precioMax - lim.precioMin + 1 }, (_, i) => lim.precioMin + i);
   const mktBase = ctx.anterior?.decisiones.marketing ?? 8500;
+  // Además de mover un poco el marketing del período pasado, siempre prueba valores razonables
+  // del rango del comentario: si un período puso 0, tiene que poder volver a invertir.
   const marketings =
     opciones.marketings ??
-    [...new Set([0.8, 0.9, 1, 1.1, 1.25].map((f) => acotar(redondear100(mktBase * f), lim.marketingMin, lim.marketingMax)))];
+    [
+      ...new Set(
+        [...[0.8, 0.9, 1, 1.1, 1.25].map((f) => mktBase * f), lim.marketingMax * 0.5, lim.marketingMax * 0.8].map((m) =>
+          acotar(redondear100(m), lim.marketingMin, lim.marketingMax),
+        ),
+      ),
+    ];
   const niveles = opciones.niveles ?? ([0, 25, 50, 75, 100] as Nivel[]);
   const stock = unidadesEnStock(ctx.estado.stock);
   const costoStock = ctx.datos.economia.costoStockUnidad;
@@ -125,6 +133,9 @@ export function mejorPlan(
         const sobrante = oferta - ventas;
         // Lo que sobra paga mantenimiento de stock y además inmoviliza plata (que hay que pedir prestada).
         const castigoSobrante = ctx.periodosRestantes > 1 ? costoStock + prod.costoUnitario * 0.3 : costoStock;
+        // Cada unidad vendida se cuenta al costo de este nivel. Con nivel 0 se vende solo stock, que ya
+        // está pagado (costo hundido): por eso "no producir" sale gratis y conviene para vaciar el depósito.
+        // Valuar el stock a su costo histórico parece más correcto, pero en las pruebas los bots deciden peor.
         const ganancia =
           ventas * (precio - prod.costoUnitario) - marketing - sobrante * castigoSobrante - despidos + contrataciones;
         if (ganancia > mejor.ganancia) mejor = { precio, marketing, nivel, demandaEsperada: demanda, ganancia };

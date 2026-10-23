@@ -119,7 +119,7 @@
       "copete": "El aumento generalizado de precios llega a la industria tecnológica. Los bancos ajustan sus condiciones.",
       "noticia": [
         "En los últimos meses los precios de la economía subieron de forma sostenida y el sector tecnológico no fue la excepción. Los consumidores ya esperan pagar un poco más por los productos, por lo que las empresas tienen margen para ajustar sus precios sin perder clientes, siempre que no se alejen demasiado de lo que cobra la competencia.",
-        "Frente a esta situación, el Banco {banco2} decidió aumentar su tasa de interés anual del 36% al 40%. Por su parte, el Banco {banco1} amplió su máximo de crédito a U$S 100.000 para acompañar a las empresas que quieran seguir invirtiendo, manteniendo su tasa del 27%.",
+        "Frente a esta situación, el Banco {banco2} decidió aumentar su tasa de interés anual del {tasa2_antes}% al {tasa2}%. Por su parte, el Banco {banco1} amplió su máximo de crédito a U$S {max1} para acompañar a las empresas que quieran seguir invirtiendo, manteniendo su tasa del {tasa1}%.",
         "El mercado de los HOLTEC sigue creciendo, aunque a un ritmo algo menor que en el período anterior. Los gerentes deberán analizar con cuidado de qué banco conviene endeudarse y si es momento de devolver parte de los préstamos más caros.",
         "Se recuerda que las tasas que figuran en los informes son anuales y cada período equivale a un cuatrimestre."
       ],
@@ -159,7 +159,7 @@
       "noticia": [
         "Los HOLTEC dejaron de ser una novedad. Hoy la mayoría de los usuarios ya conoce el producto y, a la hora de comprar, compara entre las distintas marcas. Una encuesta realizada entre consumidores reveló que la calidad de los hologramas y la duración del dispositivo son los aspectos que más valoran.",
         "Las empresas que vienen invirtiendo en Investigación y Desarrollo comienzan a ver los frutos de ese esfuerzo, ya que sus productos son los más buscados. Se espera que esta tendencia se mantenga hasta el final del año.",
-        "Por otra parte, el aumento en el costo de los repuestos hizo que la tasa de mantenimiento de las plantas pase del 10% al 11% del valor de la planta.",
+        "Por otra parte, el aumento en el costo de los repuestos hizo que la tasa de mantenimiento de las plantas pase del {mantenimiento_antes}% al {mantenimiento}% del valor de la planta.",
         "El mercado sigue creciendo, aunque los especialistas advierten que en algunas zonas ya hay más capacidad de producción que compradores, por lo que no conviene fabricar de más."
       ],
       "limites": {
@@ -191,7 +191,7 @@
       "copete": "Las fiestas de fin de año impulsan las ventas de HOLTEC. El gobierno reduce el impuesto a las ganancias para el sector.",
       "noticia": [
         "Se acerca el fin de año y, como es habitual, las compras para las fiestas mueven el mercado. Los HOLTEC están entre los regalos más pedidos de la temporada, lo que mantiene la demanda en un muy buen nivel.",
-        "Con el objetivo de promover la industria tecnológica, el gobierno decidió bajar la tasa del impuesto a las ganancias del 35% al 30% para este período.",
+        "Con el objetivo de promover la industria tecnológica, el gobierno decidió bajar la tasa del impuesto a las ganancias del {impuesto_antes}% al {impuesto}% para este período.",
         "Los consumidores siguen valorando la calidad del producto. Los gerentes deberán pensar muy bien qué inversiones hacer de cara al cierre del año: lo que se invierte en planta, capacitación o investigación recién da resultados en el período siguiente.",
         "Las condiciones de los bancos se mantienen iguales a las del período anterior."
       ],
@@ -224,7 +224,7 @@
       "copete": "Después de un año de crecimiento, las ventas de HOLTEC se mantienen estables.",
       "noticia": [
         "Pasado el furor de las fiestas, el mercado de los HOLTEC se estabiliza. Las ventas se mantienen en niveles similares a los del período anterior y no se esperan grandes cambios.",
-        "La tasa del impuesto a las ganancias vuelve al 35%. Los gerentes que todavía tengan préstamos caros pueden aprovechar para devolverlos."
+        "La tasa del impuesto a las ganancias vuelve al {impuesto}%. Los gerentes que todavía tengan préstamos caros pueden aprovechar para devolverlos."
       ],
       "limites": {
         "precioMin": 90,

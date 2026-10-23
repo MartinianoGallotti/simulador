@@ -1,5 +1,6 @@
 // Punto de entrada del motor. La UI importa todo desde acá.
 
+export * from './arranque';
 export * from './azar';
 export * from './banco';
 export * from './bots/comun';

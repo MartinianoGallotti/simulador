@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { comentarioDelPeriodo, partidaTerminada, periodoActual, type Partida } from '../../engine';
+import { comentarioDelPeriodo, datosDePartida, partidaTerminada, periodoActual, type CambiosEconomia, type Economia, type Partida } from '../../engine';
 import { num } from '../formato';
 
 export function PestanaComentario({ partida }: { partida: Partida }) {
@@ -9,7 +9,8 @@ export function PestanaComentario({ partida }: { partida: Partida }) {
   const l = c.limites;
   const capMax = partida.config.reglas.capacitacionMaxAcumulada;
   const capMultiplo = partida.config.reglas.capacitacionMultiplo;
-  const eco = c.cambiosEconomia;
+  // Cambios reales de esta partida (con arranque al azar no son los números fijos del escenario).
+  const eco = diferencias(datosDePartida(partida, numero - 1).economia, datosDePartida(partida, numero).economia);
 
   return (
     <>
@@ -97,4 +98,18 @@ export function PestanaComentario({ partida }: { partida: Partida }) {
       </article>
     </>
   );
+}
+
+/** Lo que cambió en la economía de un período al siguiente (solo los datos que cambiaron). */
+function diferencias(antes: Economia, ahora: Economia): CambiosEconomia | undefined {
+  const c: CambiosEconomia = {};
+  for (const k of ['tasaImpuesto', 'tasaMantenimiento', 'costoStockUnidad', 'limiteGiro'] as const) {
+    if (antes[k] !== ahora[k]) c[k] = ahora[k];
+  }
+  const bancos = [0, 1].map((i) => ({
+    ...(antes.bancos[i].tasaAnual !== ahora.bancos[i].tasaAnual ? { tasaAnual: ahora.bancos[i].tasaAnual } : {}),
+    ...(antes.bancos[i].maximoCredito !== ahora.bancos[i].maximoCredito ? { maximoCredito: ahora.bancos[i].maximoCredito } : {}),
+  })) as CambiosEconomia['bancos'];
+  if (bancos!.some((b) => Object.keys(b).length > 0)) c.bancos = bancos;
+  return Object.keys(c).length > 0 ? c : undefined;
 }

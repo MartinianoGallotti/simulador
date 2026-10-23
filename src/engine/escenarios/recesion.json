@@ -118,7 +118,7 @@
       "copete": "Ante la falta de dinero en la economía, los bancos encarecen y recortan el crédito.",
       "noticia": [
         "La recesión se profundizó y el consumo volvió a caer. Los bancos, preocupados por el riesgo de que las empresas no puedan pagar, decidieron endurecer sus condiciones.",
-        "El Banco {banco1} subió su tasa de interés anual del 27% al 33%. El Banco {banco2} la llevó del 36% al 44% y además redujo su máximo de crédito a U$S 70.000. Las empresas que tengan préstamos tomados por encima de ese máximo no podrán pedirle más dinero a ese banco.",
+        "El Banco {banco1} subió su tasa de interés anual del {tasa1_antes}% al {tasa1}%. El Banco {banco2} la llevó del {tasa2_antes}% al {tasa2}% y además redujo su máximo de crédito a U$S {max2}. Las empresas que tengan préstamos tomados por encima de ese máximo no podrán pedirle más dinero a ese banco.",
         "Se recomienda a los gerentes revisar muy bien su hoja de trabajo: con las tasas más altas, cada peso que se pida prestado sale más caro, y devolver los préstamos más caros puede ser una buena decisión. Ampliar la planta en este contexto es una apuesta muy riesgosa."
       ],
       "limites": {
@@ -158,7 +158,7 @@
       "copete": "Después de dos períodos difíciles, los comercios vuelven a ver movimiento.",
       "noticia": [
         "Los datos del último cuatrimestre muestran que lo peor ya pasó. El consumo todavía está por debajo de lo que era antes de la crisis, pero las ventas empezaron a crecer de a poco.",
-        "Los bancos mantienen sus tasas altas, aunque se espera que las bajen si la recuperación se confirma. El costo de los repuestos también subió: la tasa de mantenimiento de las plantas pasa del 10% al 12%.",
+        "Los bancos mantienen sus tasas altas, aunque se espera que las bajen si la recuperación se confirma. El costo de los repuestos también subió: la tasa de mantenimiento de las plantas pasa del {mantenimiento_antes}% al {mantenimiento}%.",
         "Las empresas que llegaron a este período sin deudas excesivas y sin el depósito lleno están en mejores condiciones para aprovechar la recuperación."
       ],
       "limites": {
@@ -189,7 +189,7 @@
       "copete": "La recuperación se confirma y los bancos bajan sus tasas.",
       "noticia": [
         "El consumo se recuperó y los monopatines URBAN vuelven a venderse a buen ritmo, impulsados también por el aumento del precio del transporte público.",
-        "Con una economía más estable, el Banco {banco1} bajó su tasa al 28% y el Banco {banco2} al 38%. El máximo de crédito del Banco {banco2} vuelve a ser de U$S 75.000.",
+        "Con una economía más estable, el Banco {banco1} bajó su tasa al {tasa1}% y el Banco {banco2} al {tasa2}%. El máximo de crédito del Banco {banco2} vuelve a ser de U$S {max2}.",
         "Los gerentes deben tener en cuenta que las inversiones en planta, capacitación e investigación recién dan resultado en el período siguiente."
       ],
       "limites": {
@@ -254,7 +254,7 @@
       "copete": "Con la economía en crecimiento, el crédito vuelve a ser más barato.",
       "noticia": [
         "Los últimos datos confirman que la economía volvió a crecer. Las familias recuperan su capacidad de compra y los monopatines URBAN se venden más que antes de la crisis.",
-        "Acompañando el buen momento, el Banco {banco1} bajó su tasa de interés anual al 27% y el Banco {banco2} al 36%, los mismos valores que al comienzo del año.",
+        "Acompañando el buen momento, el Banco {banco1} bajó su tasa de interés anual al {tasa1}% y el Banco {banco2} al {tasa2}%, los mismos valores que al comienzo del año.",
         "Los especialistas recomiendan aprovechar el crecimiento sin repetir los errores del pasado: fabricar lo que se puede vender y no endeudarse más de lo necesario."
       ],
       "limites": {

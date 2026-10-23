@@ -2,7 +2,7 @@
 
 import { calcularProduccion } from '../produccion';
 import { descomponerDemanda, type DescomposicionDemanda } from '../mercado';
-import { datosDePartida, ranking, type Partida } from '../partida';
+import { datosDePartida, parametrosDemandaDe, ranking, type Partida } from '../partida';
 
 export type Tono = 'bien' | 'mal' | 'neutro';
 
@@ -53,7 +53,7 @@ export function explicarPeriodo(p: Partida, numero: number): ExplicacionPeriodo 
     idAcumulado: e.idAcumulado,
   }));
   const k = activos.findIndex(({ i }) => i === p.indiceJugador);
-  const desc = descomponerDemanda(entradas, k, datos.demanda);
+  const desc = descomponerDemanda(entradas, k, datos.demanda, parametrosDemandaDe(p));
   const yo = entradas[k];
   const porQueDemanda: PuntoExplicacion[] = [];
   const mercadoAnterior = numero > 1 ? p.historial[numero - 1].resultado.industrial.unidades.totalOrdenesRecibidas : null;

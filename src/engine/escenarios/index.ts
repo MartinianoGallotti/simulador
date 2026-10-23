@@ -87,11 +87,33 @@ export function periodoOProvisorio(escenario: Escenario, numero: number): Period
 }
 
 /** Economía vigente en un período: la inicial más todos los cambios anunciados hasta ese período. */
-export function economiaDelPeriodo(escenario: Escenario, numero: number, ajustes?: CambiosEconomia): Economia {
+export function economiaDelPeriodo(escenario: Escenario, numero: number, ajustes?: CambiosEconomia, inicioPropio?: Economia): Economia {
   // La configuración puede cambiar la economía inicial; los cambios del comentario van encima.
   let eco = combinarEconomia(escenario.economiaInicial, ajustes);
+  // Con un arranque propio (al azar), los cambios del comentario se aplican como diferencias:
+  // "la tasa sube de 36% a 40%" pasa a ser "la tasa sube 4 puntos".
+  let propio = inicioPropio;
   for (const p of escenario.periodos) {
-    if (p.numero <= numero) eco = combinarEconomia(eco, p.cambiosEconomia);
+    if (p.numero > numero || !p.cambiosEconomia) continue;
+    const nueva = combinarEconomia(eco, p.cambiosEconomia);
+    if (propio) propio = aplicarDiferencias(propio, eco, nueva);
+    eco = nueva;
   }
-  return eco;
+  return propio ?? eco;
+}
+
+/** Suma a `base` lo que cambió de `antes` a `despues`. */
+function aplicarDiferencias(base: Economia, antes: Economia, despues: Economia): Economia {
+  const d = (campo: 'tasaImpuesto' | 'tasaMantenimiento' | 'costoStockUnidad' | 'limiteGiro') =>
+    Math.max(0, base[campo] + despues[campo] - antes[campo]);
+  return {
+    tasaImpuesto: d('tasaImpuesto'),
+    tasaMantenimiento: d('tasaMantenimiento'),
+    costoStockUnidad: d('costoStockUnidad'),
+    limiteGiro: d('limiteGiro'),
+    bancos: [0, 1].map((i) => ({
+      maximoCredito: Math.max(0, base.bancos[i].maximoCredito + despues.bancos[i].maximoCredito - antes.bancos[i].maximoCredito),
+      tasaAnual: Math.max(1, base.bancos[i].tasaAnual + despues.bancos[i].tasaAnual - antes.bancos[i].tasaAnual),
+    })) as Economia['bancos'],
+  };
 }
